@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemPedido extends Model
 {
-    protected $table = 'item_pedidos'; // compatível com a migration acima
+    protected $table = 'itens_pedido';
     protected $fillable = [
         'pedido_id',
         'produto_id',

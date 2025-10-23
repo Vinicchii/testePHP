@@ -19,6 +19,10 @@ class Pedido extends Model
         'valor_total'
         ];
 
+    protected $casts = [
+        'dt_pedido' => 'date',
+        ];
+
         public function cliente()
     {
         return $this->belongsTo(Cliente::class);

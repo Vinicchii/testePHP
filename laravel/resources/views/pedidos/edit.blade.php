@@ -22,6 +22,16 @@
         </div>
 
         <div class="mb-3">
+            <label for="numero_pedido" class="form-label">Número do Pedido</label>
+            <input type="number" name="numero_pedido" class="form-control" value="{{ old('numero_pedido', $pedido->numero_pedido) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dt_pedido" class="form-label">Data do Pedido</label>
+            <input type="date" name="dt_pedido" class="form-control" value="{{ old('dt_pedido', $pedido->dt_pedido->format('Y-m-d')) }}" required>
+        </div>
+
+        <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select name="status" class="form-select" required>
                 @foreach(['Em Aberto', 'Pago', 'Cancelado'] as $status)
