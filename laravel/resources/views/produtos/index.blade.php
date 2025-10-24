@@ -20,7 +20,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>Cód. Barras</th>
+                    <th>EAN</th>
                     <th>Valor Uni.</th>
                     <th>Ações</th>
                 </tr>

@@ -31,7 +31,7 @@ class ClienteController extends Controller
 
         Cliente::create($request->all());
 
-        return redirect()->route('pedidos.create')->with('success', 'Cliente cadastrado com sucesso!');
+        return redirect()->route('clientes.index')->with('success', 'Cliente cadastrado com sucesso!');
     }
 
     public function edit($id)

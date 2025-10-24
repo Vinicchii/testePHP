@@ -28,8 +28,11 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
+
+        $ultimoNumero = Pedido::max('numero_pedido');
+        $numeroPedido = $ultimoNumero ? $ultimoNumero + 1 : 1000;
+
         $request->validate([
-            'numero_pedido' => 'required|integer',
             'cliente_id' => 'required|exists:clientes,id',
             'dt_pedido' => 'required|date',
             'status' => 'required|in:Em Aberto,Pago,Cancelado',
@@ -46,7 +49,7 @@ class PedidoController extends Controller
         }
 
         $pedido = Pedido::create([
-            'numero_pedido' => $request->numero_pedido,
+            'numero_pedido' => $numeroPedido,
             'cliente_id' => $request->cliente_id,
             'dt_pedido' => $request->dt_pedido,
             'status' => $request->status,

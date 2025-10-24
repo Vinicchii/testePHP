@@ -3,6 +3,17 @@
 @section('title', 'Cadastrar Cliente')
 
 @section('content')
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $erro)
+                <li>{{ $erro }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container">
     <h2>Novo Cliente</h2>
 
@@ -25,6 +36,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar Cliente</button>
+        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 @endsection

@@ -18,7 +18,7 @@
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
+                    <th>N.º Pedido</th>
                     <th>Cliente</th>
                     <th>Data</th>
                     <th>Status</th>
@@ -29,7 +29,7 @@
             <tbody>
                 @foreach($pedidos as $pedido)
                     <tr>
-                        <td>{{ $pedido->id }}</td>
+                        <td>{{ $pedido->numero_pedido }}</td>
                         <td>{{ $pedido->cliente->nome ?? '—' }}</td>
                         <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
                         <td>{{ $pedido->status }}</td>

@@ -1,16 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $erro)
+                <li>{{ $erro }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container">
     <h2>Novo Pedido</h2>
 
     <form action="{{ route('pedidos.store') }}" method="POST">
         @csrf
-
-        <div class="mb-3">
-            <label for="numero_pedido" class="form-label">Número do Pedido</label>
-            <input type="number" name="numero_pedido" class="form-control" required>
-        </div>
 
         <div class="mb-3">
             <label for="cliente_id" class="form-label">Cliente</label>
@@ -52,6 +57,7 @@
         <button type="button" class="btn btn-secondary mb-3" onclick="adicionarProduto()">+ Adicionar Produto</button>
 
         <button type="submit" class="btn btn-primary">Salvar Pedido</button>
+        <a href="{{ route('pedidos.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 

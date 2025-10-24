@@ -16,7 +16,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="cod_barras" class="form-label">Código de Barras</label>
+            <label for="cod_barras" class="form-label">EAN</label>
             <input type="text" name="cod_barras" class="form-control" value="{{ old('cod_barras', $produto->cod_barras) }}">
         </div>
 
