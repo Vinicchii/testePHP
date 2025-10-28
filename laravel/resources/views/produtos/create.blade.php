@@ -17,7 +17,7 @@
 
         <div class="mb-3">
             <label for="cod_barras" class="form-label">EAN (Código de Barras)</label>
-            <input type="text" name="cod_barras" minlength="13" maxlength="13"  class="form-control" required>
+            <input type="text" name="cod_barras"  class="form-control" >
         </div>
 
         <div class="mb-3">

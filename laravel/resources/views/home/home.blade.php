@@ -7,7 +7,9 @@
     <h2 class="mb-4"><i class="bi bi-bar-chart-line-fill ps-2 me-2"></i>Visão Geral</h2>
 
     <div class="row">
+
         {{-- Coluna da esquerda com cards verticais --}}
+
         <div class="col-md-3 d-flex flex-column gap-3">
 
 
@@ -44,8 +46,11 @@
         </div>
 
         {{-- Coluna da direita com círculo de faturamento e itens com clientes --}}
+
         <div class="col-md-6 d-flex flex-column align-items-center justify-content-start">
+
             {{-- Carrossel de Indicadores --}}
+
             <div id="indicadoresCarousel" class="carousel slide mb-4" data-bs-touch="false" data-bs-interval="false">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#indicadoresCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Faturamento Potencial"></button>

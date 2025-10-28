@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!form) return;
 
     form.addEventListener("submit", function (e) {
+        //Errors: um array onde serão passadas mensagens de erro
         const errors = [];
+
         const nome = this.querySelector('input[name="nome"]').value.trim();
         const cpf = this.querySelector('input[name="cpf"]').value.trim();
         const email = this.querySelector('input[name="email"]').value.trim();
@@ -13,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             errors.push("Nome é obrigatório.");
         } else if (nome.length < 3) {
             errors.push("Nome deve ter pelo menos 3 caracteres.");
+            //Regex para o email
         } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nome)) {
             errors.push("Nome deve conter apenas letras e espaços.");
         }
