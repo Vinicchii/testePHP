@@ -45,11 +45,48 @@
 
         {{-- Coluna da direita com círculo de faturamento e itens com clientes --}}
         <div class="col-md-6 d-flex flex-column align-items-center justify-content-start">
-            {{-- Círculo de faturamento --}}
-            <div class="rounded-circle bg-dark text-white d-flex flex-column justify-content-center align-items-center shadow mb-4" style="width: 250px; height: 250px;">
-                <h6 class="text-uppercase">Faturamento Potencial</h6>
-                <h2 class="fw-bold">R$ {{ number_format($totalFaturamento, 2, ',', '.') }}</h2>
-                <small class="text-amber-50">Pedidos em aberto e pagos</small>
+            {{-- Carrossel de Indicadores --}}
+            <div id="indicadoresCarousel" class="carousel slide mb-4" data-bs-touch="false" data-bs-interval="false">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#indicadoresCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Faturamento Potencial"></button>
+                    <button type="button" data-bs-target="#indicadoresCarousel" data-bs-slide-to="1" aria-label="Faturamento Realizado"></button>
+                    <button type="button" data-bs-target="#indicadoresCarousel" data-bs-slide-to="2" aria-label="Pedidos Cancelados"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="rounded-circle bg-dark text-white d-flex flex-column justify-content-center align-items-center shadow" style="width: 250px; height: 250px;">
+                            <h6 class="text-uppercase">Faturamento Potencial</h6>
+                            <h2 class="fw-bold">R$ {{ number_format($faturamentoPotencial, 2, ',', '.') }}</h2>
+                            <small>Pedidos em abertos e pagos</small>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="rounded-circle bg-success text-white d-flex flex-column justify-content-center align-items-center shadow" style="width: 250px; height: 250px;">
+                            <h6 class="text-uppercase">Faturamento Realizado</h6>
+                            <h2 class="fw-bold">R$ {{ number_format($faturamentoPago, 2, ',', '.') }}</h2>
+                            <small>Pedidos pagos</small>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="rounded-circle bg-danger text-white d-flex flex-column justify-content-center align-items-center shadow" style="width: 250px; height: 250px;">
+                            <h6 class="text-uppercase">Pedidos Cancelados</h6>
+                            <h2 class="fw-bold">R$ {{ number_format($faturamentoCancelado, 2, ',', '.') }}</h2>
+                            <small>Valor total cancelado</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#indicadoresCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#indicadoresCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
             </div>
 
             {{-- Itens com clientes em formato vertical --}}

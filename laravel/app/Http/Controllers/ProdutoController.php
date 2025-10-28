@@ -8,10 +8,42 @@ use App\Models\Produto;
 
 class ProdutoController extends Controller
 {
-
-    public function index()
+    public function show($id)
     {
-        $produtos = Produto::all();
+        $produto = Produto::with(['itens.pedido.cliente'])->findOrFail($id);
+
+        return view('produtos.show', compact('produto'));
+    }
+
+    public function index(Request $request)
+    {
+        $query = Produto::query();
+
+        if ($request->filled('id')) {
+            $query->where('id', $request->get('id'));
+        }
+
+        if ($request->filled('nome')) {
+            $query->where('nome', 'like', "%{$request->get('nome')}%"
+            );
+        }
+
+        if ($request->filled('cod_barras')) {
+            $query->where('cod_barras', 'like', "%{$request->get('cod_barras')}%");
+        }
+
+        if ($request->filled('valor_unitario')) {
+            $query->where('valor_unitario', $request->get('valor_unitario'));
+        }
+
+        $allowedSorts = ['id', 'nome', 'cod_barras', 'valor_unitario'];
+        $sort = $request->get('sort', 'id');
+        $direction = strtolower($request->get('direction', 'asc')) === 'desc' ? 'desc' : 'asc';
+        if (in_array($sort, $allowedSorts)) {
+            $query->orderBy($sort, $direction);
+        }
+
+        $produtos = $query->paginate(20)->withQueryString();
         return view('produtos.index', compact('produtos'));
     }
 
@@ -60,7 +92,7 @@ class ProdutoController extends Controller
         $produto = Produto::findOrFail($id);
 
         // Verifica se o produto está vinculado a algum item de pedido
-        if ($produto->itensPedido()->exists()) {
+        if ($produto->itens()->exists()) {
             return redirect()->route('produtos.index')->with('error', 'Não é possível excluir um produto vinculado a pedidos.');
         }
 

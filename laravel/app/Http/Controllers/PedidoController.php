@@ -13,9 +13,58 @@ use App\Models\ItemPedido;
 class PedidoController extends Controller
 {
 
-    public function index()
+    public function show($id)
     {
-        $pedidos = Pedido::with('cliente', 'itens.produto')->get();
+        $pedido = Pedido::with(['cliente', 'itens' => function($query) {
+            $query->with('produto');
+        }])->findOrFail($id);
+
+        return view('pedidos.show', compact('pedido'));
+    }
+
+    public function index(Request $request)
+    {
+        $query = Pedido::with('cliente', 'itens.produto');
+
+        // Filters
+        if ($request->filled('numero_pedido')) {
+            $query->where('numero_pedido', $request->get('numero_pedido'));
+        }
+
+        // Allow filtering by cliente_id (strong) or by cliente name (fallback)
+        if ($request->filled('cliente_id')) {
+            $query->where('cliente_id', $request->get('cliente_id'));
+        } elseif ($request->filled('cliente')) {
+            $cliente = $request->get('cliente');
+            $query->whereHas('cliente', function ($q) use ($cliente) {
+                $q->where('nome', 'like', "%{$cliente}%");
+            });
+        }
+
+        if ($request->filled('dt_pedido')) {
+            $query->whereDate('dt_pedido', $request->get('dt_pedido'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->get('status'));
+        }
+
+        // Sorting
+        $allowedSorts = ['id', 'numero_pedido', 'dt_pedido', 'status', 'valor_total', 'cliente'];
+        $sort = $request->get('sort', 'numero_pedido');
+        $direction = strtolower($request->get('direction', 'desc')) === 'asc' ? 'asc' : 'desc';
+
+        if ($sort === 'cliente') {
+            // order by cliente.nome - join to support ordering
+            $query->join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                ->orderBy('clientes.nome', $direction)
+                ->select('pedidos.*');
+        } elseif (in_array($sort, $allowedSorts)) {
+            $query->orderBy($sort, $direction);
+        }
+
+        $pedidos = $query->paginate(20)->withQueryString();
+
         return view('pedidos.index', compact('pedidos'));
     }
 

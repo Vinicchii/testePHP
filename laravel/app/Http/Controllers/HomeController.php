@@ -15,7 +15,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $totalFaturamento = Pedido::whereIn('status', ['Em Aberto', 'Pago'])->sum('valor_total');
+        $faturamentoPago = Pedido::where('status', 'Pago')->sum('valor_total');
+        $faturamentoEmAberto = Pedido::where('status', 'Em Aberto')->sum('valor_total');
+        $faturamentoCancelado = Pedido::where('status', 'Cancelado')->sum('valor_total');
+        $faturamentoPotencial = $faturamentoPago + $faturamentoEmAberto;
         $totalClientes = Cliente::count();
         $clientesComPedido = Cliente::has('pedidos')->count();
         $totalProdutos = Produto::count();
@@ -49,7 +52,9 @@ class HomeController extends Controller
             'pedidosEmAberto',
             'pedidosPagos',
             'pedidosCancelados',
-            'totalFaturamento',
+            'faturamentoPago',
+            'faturamentoPotencial',
+            'faturamentoCancelado',
             'produtosComClientes'
         ));
     }

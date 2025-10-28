@@ -17,7 +17,8 @@
 <div class="container">
     <h2>Novo Cliente</h2>
 
-    <form action="{{ route('clientes.store') }}" method="POST">
+    <div id="cliente-errors" class="alert alert-danger d-none"></div>
+    <form id="form-cliente" action="{{ route('clientes.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -27,7 +28,7 @@
 
         <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
-            <input type="text" name="cpf" class="form-control" required>
+            <input type="text" name="cpf" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -39,4 +40,9 @@
         <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/validation/cliente.js') }}"></script>
 @endsection

@@ -14,12 +14,13 @@
 <div class="container">
     <h2>Novo Pedido</h2>
 
-    <form action="{{ route('pedidos.store') }}" method="POST">
+    <div id="pedido-errors" class="alert alert-danger d-none"></div>
+    <form id="form-pedido" action="{{ route('pedidos.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
             <label for="cliente_id" class="form-label">Cliente</label>
-            <select name="cliente_id" class="form-select" required>
+            <select name="cliente_id" class="form-select">
                 <option value="">Selecione</option>
                 @foreach($clientes as $cliente)
                     <option value="{{ $cliente->id }}">{{ $cliente->nome }} ({{ $cliente->cpf }})</option>
@@ -29,25 +30,25 @@
 
         <div class="mb-3">
             <label for="dt_pedido" class="form-label">Data do Pedido</label>
-            <input type="datetime-local" name="dt_pedido" class="form-control" required>
+            <input type="datetime-local" name="dt_pedido" class="form-control">
         </div>
 
         <h4>Produtos</h4>
         <div id="produtos-container">
             <div class="produto-item mb-3">
-                <select name="produtos[0][produto_id]" class="form-select" required>
+                <select name="produtos[0][produto_id]" class="form-select">
                     <option value="">Selecione um produto</option>
                     @foreach($produtos as $produto)
                         <option value="{{ $produto->id }}">{{ $produto->nome }} - R$ {{ number_format($produto->valor_unitario, 2, ',', '.') }}</option>
                     @endforeach
                 </select>
-                <input type="number" name="produtos[0][quantidade]" class="form-control mt-2" placeholder="Quantidade" required>
+                <input type="number" name="produtos[0][quantidade]" class="form-control mt-2" placeholder="Quantidade">
             </div>
         </div>
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" class="form-select" required>
+            <select name="status" class="form-select">
                 <option value="Em Aberto">Em Aberto</option>
                 <option value="Pago">Pago</option>
                 <option value="Cancelado">Cancelado</option>
@@ -81,4 +82,9 @@ function adicionarProduto() {
     produtoIndex++;
 }
 </script>
+
+@section('scripts')
+<script src="{{ asset('js/validation/pedido.js') }}"></script>
+@endsection
+
 @endsection
