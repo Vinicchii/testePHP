@@ -1,6 +1,7 @@
 ## Passos para rodar o projeto
 
 1. **Crie o arquivo `.env`**
+
    Caso não existir:
 
 ```bash
