@@ -24,14 +24,14 @@
 
             <div class="card shadow p-2 border-0">
                 <div class="card-body">
-                    <h6 class="text-muted"><i class="bi bi-bag-fill me-2"></i>Pedidos</h6>
+                    <h6><a class="text-muted text-decoration-none" href="{{ url('/pedidos') }}"><i class="bi bi-bag-fill me-2"></i>Pedidos</a></h6>
                     <h3 class="fw-bold">{{ $pedidosEmAberto }}</h3>
                 </div>
             </div>
 
             <div class="card shadow p-2 border-0">
                 <div class="card-body">
-                    <h6 class="text-muted"><i class="bi bi-person-fill me-2"></i>Clientes</h6>
+                    <h6><a class="text-muted text-decoration-none" href="{{ url('/clientes') }}"><i class="bi bi-person-fill me-2"></i>Clientes</a></h6>
                     <h3 class="fw-bold">{{ $totalClientes }}</h3>
                     <p class="mb-0 text-success">{{ $clientesComPedido }} com pedidos</p>
                 </div>
@@ -39,7 +39,7 @@
 
             <div class="card shadow p-2 border-0">
                 <div class="card-body">
-                    <h6 class="text-muted"><i class="bi bi-box-seam-fill me-2"></i>Produtos</h6>
+                    <h6><a class="text-muted text-decoration-none" href="{{ url('/produtos') }}"><i class="bi bi-box-seam-fill me-2"></i>Produtos</a></h6>
                     <h3 class="fw-bold">{{ $totalProdutos }}</h3>
                 </div>
             </div>
