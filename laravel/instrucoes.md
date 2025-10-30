@@ -19,6 +19,7 @@ cp .env.example .env
 _No arquivo .env, confirme que a configuração está assim:_
 
 **DB_CONNECTION=sqlite**
+
 **DB_DATABASE=/var/www/html/database/database.sqlite**
 
 3. **Suba o container no Docker**
@@ -44,4 +45,4 @@ _No arquivo .env, confirme que a configuração está assim:_
 
 6. **Acesso ao projeto**
 
-http://localhost:8000
+ *http://localhost:8000*
