@@ -2,9 +2,13 @@ FROM php:8.4-fpm
 
 # Instala dependências do sistema e extensões PHP
 RUN apt-get update && apt-get install -y \
+    apt-utils \
+    ca-certificates \
     libsqlite3-dev \
+    libonig-dev \
     zip unzip git curl \
     && docker-php-ext-install pdo pdo_sqlite mbstring
+
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
